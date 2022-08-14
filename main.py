@@ -5,9 +5,12 @@ def oddEven(num):
     else:
         return "odd"
 base2 = []
-for i in range(0, 25):
+commonBaseDict = {}
+commonPeakDict = {}
+for i in range(0, 46):
     base2.append(2**i)
-for i in range(1, 1001):
+top = [0, 0]
+for i in range(1, 101):
     counter1 = 0
     holder1 = i
     base = False
@@ -28,6 +31,19 @@ for i in range(1, 1001):
         if holder1 > peak:
             peak = holder1
             peakSteps = counter1
+    if top[0] < peak:
+        top = [peak, i]
     if (2**counter1 != i):
         print(str(i) + " : " + str(counter1) + " : ( " + str(baseHit) + " in " + str(baseSteps) + " counts ) : [ " + str(peak) + " in " + str(peakSteps) + " counts ]")
+        if str(int(peak)) in commonPeakDict:
+            commonPeakDict[str(int(peak))] += 1
+        else:
+            commonPeakDict[str(int(peak))] = 1
+        if str(int(baseHit)) in commonBaseDict:
+            commonBaseDict[str(int(baseHit))] += 1
+        else:
+            commonBaseDict[str(int(baseHit))] = 1
 print("ignoring all 2^x integers")
+print(commonBaseDict)
+#print(commonPeakDict)
+print(top)
