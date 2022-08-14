@@ -10,7 +10,10 @@ commonPeakDict = {}
 for i in range(0, 46):
     base2.append(2**i)
 top = [0, 0]
-for i in range(1, 101):
+slopeC = 0
+slopeS = 0
+slopeArray = []
+for i in range(1, 10001):
     counter1 = 0
     holder1 = i
     base = False
@@ -28,6 +31,8 @@ for i in range(1, 101):
             baseHit = holder1
             base = True
             baseSteps = counter1
+            if baseHit == 16:
+                slopeS += 1
         if holder1 > peak:
             peak = holder1
             peakSteps = counter1
@@ -43,7 +48,18 @@ for i in range(1, 101):
             commonBaseDict[str(int(baseHit))] += 1
         else:
             commonBaseDict[str(int(baseHit))] = 1
+        if slopeC >= 1000:
+            slopeC = 0
+            slopeArray.append(slopeS/1000)
+            slopeS = 0
+        else:
+            slopeC += 1
 print("ignoring all 2^x integers")
 print(commonBaseDict)
 #print(commonPeakDict)
 print(top)
+slopeSum = 0
+for i in slopeArray:
+    slopeSum += i
+print(slopeArray)
+print(slopeSum/len(slopeArray))
